@@ -2,7 +2,7 @@ class Corsa{
 	const property capacidad = 4
 	const property velocidadMaxima = 150
 	const property peso = 1300
-	var color
+	var property color
 	
 	constructor (_color){
 		color = _color
@@ -17,17 +17,20 @@ class Standard{
 		tanqueAdicional = true
 	}
 	
-	method capacidad() =
-		if (tanqueAdicional = false) 4
-		else 3
+	method capacidad(){
+		return if (tanqueAdicional) 3
+		else 4
+	}
 		
-	method velocidadMaxima() = 
-		if (tanqueAdicional = false) 110
-		else  120
+	method velocidadMaxima(){
+		return if (tanqueAdicional) 120
+		else  110
+	}
 		
-	method peso() =
-		if (tanqueAdicional = false) 1200
-		else 1350	
+	method peso(){
+		return if (tanqueAdicional) 1350
+		else 1200
+	}	
 }
 
 object traffic{
@@ -70,11 +73,11 @@ object bataton{
 	const property peso = 500
 }
 
-class VehiculoDistinto{
-	var capacidad
-	var velocidadMaxima
-	var peso
-	var color
+class Distinto{
+	var property capacidad
+	var property velocidadMaxima
+	var property peso
+	var property color
 	
 	constructor(_capacidad, _velocidadMaxima, _peso, _color){
 		capacidad = _capacidad

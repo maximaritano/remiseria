@@ -1,0 +1,51 @@
+//Armar un test en el que hay dos remiserías.
+//En el test, denir un auto llamado cachito, (o sea, poner var cachito = ...), que
+//sea un Corsa rojo.
+//Los autos de la primer remisería son: cachito; dos Corsa más, uno negro y el otro
+//verde; un auto standard a gas con el tanque adicional puesto; y un auto distinto
+//que tiene: capacidad 5, velocidad máxima 160 km/h, peso 1200 kg, color beige.
+//Los autos de la segunda remisería son: cachito; tres autos standard a gas, uno con el
+//tanque adicional puesto y dos sin, y la Trac, congurada con el interior cómodo y
+//el motor batatón.
+//Sí, cachito está en la ota de las dos remiserías, acepta encargos de las dos.
+//Hacer asserts sobre cada una, respecto del peso total, si es recomendable o no, la
+//capacidad total yendo a 140 km/h, y el color del auto más rápido.
+import flota.*
+import remiseria.*
+
+test "dos remiserias" {
+	var cachito = new Corsa("rojo")
+	var corsa1 = new Corsa("negro")
+	var corsa2 = new Corsa("verde")
+	const remiseria1 = new Remiseria()
+	remiseria1.agregarAFlota(cachito)
+	remiseria1.agregarAFlota(corsa1)
+	remiseria1.agregarAFlota(corsa2)
+	var standard1 = new Standard()
+	standard1.agregarTanqueAdicional()
+	remiseria1.agregarAFlota(standard1)
+	var distinto1 = new Distinto(5, 160, 1200, "beige") 
+	remiseria1.agregarAFlota(distinto1)
+	const remiseria2 = new Remiseria()
+	remiseria2.agregarAFlota(cachito)
+	var standard2 = new Standard()
+	standard2.agregarTanqueAdicional()
+	var standard3 = new Standard()
+	var standard4 = new Standard()
+	remiseria2.agregarAFlota(standard2)
+	remiseria2.agregarAFlota(standard3)
+	remiseria2.agregarAFlota(standard4)
+	traffic.cambiarInterior(comodo)
+	traffic.cambiarMotor(bataton)
+	remiseria2.agregarAFlota(traffic)
+	assert.equals(6450, remiseria1.pesoTotalFlota())
+	assert.equals(10250, remiseria2.pesoTotalFlota())
+	assert.equals(true, remiseria1.esRecomendable())
+	assert.equals(false, remiseria2.esRecomendable())
+	assert.equals(17, remiseria1.capacidadTotalYendoA(140))
+	assert.equals(4, remiseria2.capacidadTotalYendoA(140))
+	//assert.equals(distinto1, remiseria1.autoMasRapido())
+	assert.equals("beige", remiseria1.colorDelAutoMasRapido())
+	//assert.equals(cachito, remiseria2.autoMasRapido())
+	assert.equals("rojo", remiseria2.colorDelAutoMasRapido())
+}
