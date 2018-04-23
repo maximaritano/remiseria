@@ -12,6 +12,7 @@
 //capacidad total yendo a 140 km/h, y el color del auto más rápido.
 import flota.*
 import remiseria.*
+import viaje.*
 
 test "dos remiserias" {
 	var cachito = new Corsa("rojo")

@@ -1,7 +1,9 @@
 import flota.*
+import viaje.*
 
 class Remiseria{
 	var property vehiculos = #{}
+	var property viajes = #{}
 	
 	method agregarAFlota(vehiculo) =
 		vehiculos.add(vehiculo)
@@ -23,9 +25,24 @@ class Remiseria{
 	
 	method velocidadAlMenos(velocidad) = vehiculos.filter({_vehiculo => _vehiculo.velocidadMaxima() >= velocidad})
 	
-	method autoMasRapido() = vehiculos.max({_vehiculo => _vehiculo.velocidadMaxima()})
-	
 	method colorDelAutoMasRapido(){
-		return self.autoMasRapido().color()
+		return vehiculos.max({_vehiculo => _vehiculo.velocidadMaxima()}).color()
 	}	
+	
+	method autosDisponiblesParaElViaje(viaje){
+		return vehiculos.filter({_vehiculo => viaje.puedeHacerElViaje(_vehiculo)})
+	}
+	
+	method registrarViaje(viaje, auto){
+		viajes.add(viaje)
+		viaje.autoQueLoHizo(auto)
+	}
+	
+	method cuantosViajesHizo(vehiculo){
+		return viajes.filter({_viaje => _viaje.autoQueHizoElViaje() == vehiculo}).size()
+	}
+	
+	method cuantosViajesHizoDeMasDe(_kilometros){
+		return viajes.filter({_viaje => _viaje.km() > _kilometros}).size()
+	}
 }

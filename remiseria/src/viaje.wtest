@@ -1,0 +1,25 @@
+import viaje.*
+import flota.*
+import remiseria.*
+test "test remiserias"{
+	var cachito = new Corsa("rojo")
+	var corsa1 = new Corsa("negro")
+	var corsa2 = new Corsa("verde")
+	const remiseria1 = new Remiseria()
+	remiseria1.agregarAFlota(cachito)
+	remiseria1.agregarAFlota(corsa1)
+	remiseria1.agregarAFlota(corsa2)
+	var standard1 = new Standard()
+	standard1.agregarTanqueAdicional()
+	remiseria1.agregarAFlota(standard1)
+	var distinto1 = new Distinto(5, 160, 1200, "beige") 
+	remiseria1.agregarAFlota(distinto1)
+	//assert.equals("beige", remiseria1.colorDelAutoMasRapido())
+	const viaje1 = new Viaje(150, 2, 3)
+	viaje1.listaColoresIncompatibles(#{"negro", "verde", "beige"})
+	remiseria1.registrarViaje(viaje1, cachito)
+	assert.equals(#{cachito, standard1}, remiseria1.autosDisponiblesParaElViaje(viaje1))
+	assert.equals(1, remiseria1.cuantosViajesHizo(cachito))
+	assert.equals(0,remiseria1.cuantosViajesHizoDeMasDe(170))
+} 
+
